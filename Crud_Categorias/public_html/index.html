@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html>
+    <head>
+        <title>CRUD De Cursos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body data-ng-app="app" data-ng-controller="ctrl as c"> 
+        <div class="create" >
+            <h3 style="margin-left:5%">Criando Novo Curso</h3>
+            
+            <form>
+                <label for="assuntos">* Descrição do assunto: </label>
+                <input id="assunto_id" type="text" ng-model="c.curso.assunto"/>
+                <div class="clean" style="margin-top: 20px;"></div>
+
+                <label for="assunto">* Data de início: </label>
+                <input id="dt_inicio" type="date" ng-model="c.curso.inicio"/>
+                <div class="clean" style="margin-top: 20px;"></div>
+
+                <label for="assunto">* Data de término </label>
+                <input id="dt_fim" type="date" ng-model="c.curso.fim"/>
+                <div class="clean" style="margin-top: 20px;"></div>
+
+                <label for="assunto">Quantidade de alunos: </label>
+                <input id="qtd_al" type="number" ng-model="c.curso.qtd"/>
+                <div class="clean" style="margin-top: 20px;"></div>
+
+                <label>Categoria: </label>
+                <select class="cat">
+                </select>
+                
+                <div class="clean" style="margin-top: 20px;"></div>
+                
+                <div class="clean" style="margin-top: 20px;"></div>
+                <button data-ng-click="c.salvar()" style="margin-left:8%">Salvar</button>
+                <br/><br/>
+                
+                <div class="pesquisa">
+                    Pesquisar pelo nome:
+                    <input id="assunto_p" type="text" ng-model="c.assunto"/>
+                    <button data-ng-click="c.pesquisar(c.assunto)">Pesquisar</button>
+                    <button data-ng-click="c.limpar()">Limpar</button>
+                </div>
+                <br/><br/>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="title">ID</th>
+                            <th class="title">Assunto</th>
+                            <th class="title">Início</th>
+                            <th class="title">Término</th>
+                            <th class="title">Alunos</th>
+                            <th class="title">Categoria</th>
+                            <th class="title">Excluir</th>
+                            <th class="title">Atualizar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="cr in c.cursos">
+                            <td>{{cr.id}}</td>
+                            <td><input id="descricao_alt" type="text" value="{{cr.descricao}}"/></td>
+                            <td><input id="dataInicio_alt" type="date" value="{{cr.dataInicio}}" ng-model="cr.dataI"/></td>
+                            <td><input id="dataTermino_alt" type="date" value="{{cr.dataTermino}}" ng-model="cr.dataT"/></td>
+                            <td><input id="quantidadeAluno_alt" type="text" value="{{cr.quantidadeAluno}}"/></td>
+                            <td>
+                                <select class="categoria_alt">
+                                    <option value="1" data-ng-selected="cr.categoria.id==1">Comportamental</option>
+                                    <option value="2" data-ng-selected="cr.categoria.id==2">Programação</option>
+                                    <option value="3" data-ng-selected="cr.categoria.id==3">Qualidade</option>
+                                    <option value="4" data-ng-selected="cr.categoria.id==4">Processos</option>
+                                </select>
+                            </td>
+                            <td><button data-ng-click="c.excluir(cr.id)">Excluir</button></td>
+                            <td><button data-ng-click="c.atualizar(cr)">Atualizar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="app/app.js"></script>
+    </body>
+</html>
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 10px;
+      }
+    .title {
+        background-color: #e8e6e6;
+    }
+</style>
